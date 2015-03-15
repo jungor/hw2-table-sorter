@@ -72,9 +72,15 @@ function mySort() {
 
         // j begin from 1 to ignore the head
         for (var j = 1; j < rows.length-1-i; j++) {
-
-            // lexicographic sorting
-            var result = rows[j].children[index].innerHTML.localeCompare(rows[j+1].children[index].innerHTML);
+            var patt = /\d+/;
+            var result;
+            var content1 = rows[j].children[index].innerHTML;
+            var content2 = rows[j+1].children[index].innerHTML;
+            if (patt.test(content1) && patt.test(content2)) {
+                result = parseInt(content1)-parseInt(content2);
+            } else {
+                result = content1.localeCompare(content2);
+            }
 
             // inverse the result in case of descend
             if (this.classList.contains("descend")) result = 0 - result;
